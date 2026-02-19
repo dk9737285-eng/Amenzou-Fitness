@@ -623,7 +623,7 @@ footer {
             <p id="contact-text">Sign up and we'll verify your email instantly. You'll receive exclusive updates and offers from Amenzou Fitness.</p>
             <div class="contact-detail">
                 <div class="contact-icon">📧</div>
-                <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cda4a3aba28daca0a8a3b7a2b8aba4b9a3a8bebee3aea2a0">[email&#160;protected]</a></span>
+                <span>info@amenzoufitness.com</span>
             </div>
             <div class="contact-detail">
                 <div class="contact-icon">📞</div>
@@ -706,14 +706,14 @@ footer {
 <footer id="footer-text">© 2026 Amenzou Fitness</footer>
 
 <!-- ===== SCRIPT ===== -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // =============================================
 // ⚙️  EMAILJS CONFIGURATION
 // Follow steps in the setup guide to get these
 // =============================================
-const EMAILJS_SERVICE_ID  = 'service_2ae7lf3';   // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'template_soemquh';  // e.g. 'template_xyz456'
-const EMAILJS_PUBLIC_KEY  = '1g_I4DUvoU3ELEurt';   // e.g. 'abcDEF123456'
+const EMAILJS_SERVICE_ID = 'service_2ae7lf3' // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'template_soemquh' // e.g. 'template_xyz456'
+const EMAILJS_PUBLIC_KEY  = '1g_I4DUvoU3ELEurt'// e.g. 'abcDEF123456'
 // =============================================
 
 // Init EmailJS
@@ -837,58 +837,34 @@ function applyLanguage() {
     const l = getLang();
     document.body.dir = l.dir;
 
-    // Navigation
     document.getElementById('lang-btn').innerText       = l.langBtn;
     document.getElementById('nav-home').innerText       = l.navHome;
     document.getElementById('nav-programs').innerText   = l.navPrograms;
     document.getElementById('nav-pricing').innerText    = l.navPricing;
     document.getElementById('nav-contact').innerText    = l.navContact;
 
-    // Home section
     document.getElementById('home-title').innerHTML  = l.homeTitle;
     document.getElementById('home-text').innerText   = l.homeText;
     document.getElementById('hero-cta').innerText    = l.heroCta;
 
-    // Programs section
     document.getElementById('programs-title').innerHTML = l.programsTitle;
     document.getElementById('programs-sub').innerText   = l.programsSub;
-    document.getElementById('p1-title').innerText = l.p1; 
-    document.getElementById('p1-desc').innerText = l.p1d;
-    document.getElementById('p2-title').innerText = l.p2; 
-    document.getElementById('p2-desc').innerText = l.p2d;
-    document.getElementById('p3-title').innerText = l.p3; 
-    document.getElementById('p3-desc').innerText = l.p3d;
-    document.getElementById('p4-title').innerText = l.p4; 
-    document.getElementById('p4-desc').innerText = l.p4d;
+    document.getElementById('p1-title').innerText = l.p1; document.getElementById('p1-desc').innerText = l.p1d;
+    document.getElementById('p2-title').innerText = l.p2; document.getElementById('p2-desc').innerText = l.p2d;
+    document.getElementById('p3-title').innerText = l.p3; document.getElementById('p3-desc').innerText = l.p3d;
+    document.getElementById('p4-title').innerText = l.p4; document.getElementById('p4-desc').innerText = l.p4d;
 
-    // Pricing section
     document.getElementById('pricing-title').innerHTML = l.pricingTitle;
     document.getElementById('pricing-sub').innerText   = l.pricingSub;
     document.getElementById('pl-basic').innerText = l.plBasic;
     document.getElementById('pl-std').innerText   = l.plStd;
     document.getElementById('pl-prem').innerText  = l.plPrem;
-    ['pp-mo','pp-mo2','pp-mo3'].forEach(id => {
-        const el = document.getElementById(id);
-        if(el) el.innerText = l.ppMo;
-    });
-    l.pf1.forEach((v,i) => {
-        const el = document.getElementById(`pf1-${i+1}`);
-        if(el) el.innerText = v;
-    });
-    l.pf2.forEach((v,i) => {
-        const el = document.getElementById(`pf2-${i+1}`);
-        if(el) el.innerText = v;
-    });
-    l.pf3.forEach((v,i) => {
-        const el = document.getElementById(`pf3-${i+1}`);
-        if(el) el.innerText = v;
-    });
-    ['pb1','pb2','pb3'].forEach(id => {
-        const el = document.getElementById(id);
-        if(el) el.innerText = l.pbtn;
-    });
+    ['pp-mo','pp-mo2','pp-mo3'].forEach(id => document.getElementById(id).innerText = l.ppMo);
+    l.pf1.forEach((v,i) => document.getElementById(`pf1-${i+1}`).innerText = v);
+    l.pf2.forEach((v,i) => document.getElementById(`pf2-${i+1}`).innerText = v);
+    l.pf3.forEach((v,i) => document.getElementById(`pf3-${i+1}`).innerText = v);
+    ['pb1','pb2','pb3'].forEach(id => document.getElementById(id).innerText = l.pbtn);
 
-    // Contact section
     document.getElementById('contact-title').innerHTML  = l.contactTitle;
     document.getElementById('contact-text').innerText   = l.contactText;
     document.getElementById('s1-title').innerText       = l.s1Title;
@@ -1074,4 +1050,15 @@ function startResendTimer() {
     resendTimer = setInterval(() => {
         resendSeconds--;
         const l = getLang();
-        span.textContent = l.resendWait.re
+        span.textContent = l.resendWait.replace('{s}', resendSeconds);
+        if (resendSeconds <= 0) {
+            clearInterval(resendTimer);
+            btn.disabled = false;
+            span.textContent = l.resendNow;
+        }
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
